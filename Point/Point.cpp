@@ -1,4 +1,4 @@
-#include "Point.h"
+п»ї#include "Point.h"
 
 Point::Point()
 {
@@ -12,7 +12,7 @@ Point::Point(int x, int y)
 	this->y = y;
 }
 
-Point Point::operator+(const Point& obj) const ///////перший операнд p1 це this, а другий операнд p2 це параметр const Point& obj      у main    p1+p2
+Point Point::operator+(const Point& obj) const ///////РїРµСЂС€РёР№ РѕРїРµСЂР°РЅРґ Р° С†Рµ this, Р° РґСЂСѓРіРёР№ РѕРїРµСЂР°РЅРґ b С†Рµ РїР°СЂР°РјРµС‚СЂ const Point& obj      Сѓ main    a+b
 {
 
 	//this->x += obj.x;
@@ -21,10 +21,10 @@ Point Point::operator+(const Point& obj) const ///////перший операнд p1 це this,
 	return rez;
 }
 
-Point Point::operator+(int a) const////  p1+5
+Point Point::operator+(int a) const
 {
 	////this 
-	Point rez(this->x + a, this->y + a);
+	Point rez(x + a, y + a);
 	return rez;
 }
 
@@ -36,7 +36,7 @@ Point Point::operator+=(int rs)
 	return *this;
 }
 
-bool Point::operator==(const Point& obj)////  p1==p2
+bool Point::operator==(const Point& obj)
 {
 	if (x == obj.x)
 		if (y == obj.y)
@@ -46,7 +46,7 @@ bool Point::operator==(const Point& obj)////  p1==p2
 	return false;
 }
 
-bool Point::operator>(const Point& obj)////  р1>p2
+bool Point::operator>(const Point& obj)
 {
 	if (x > obj.x)
 		if (y >obj.y)
@@ -56,7 +56,7 @@ bool Point::operator>(const Point& obj)////  р1>p2
 	return false;
 }
 
-void Point::Show() const///// є методом класу Point::   , ::- оператор розширення видимості
+void Point::Show() const///// С” РјРµС‚РѕРґРѕРј РєР»Р°СЃСѓ Point::   , ::- РѕРїРµСЂР°С‚РѕСЂ СЂРѕР·С€РёСЂРµРЅРЅСЏ РІРёРґРёРјРѕСЃС‚С–
 {
 	cout <<"X: "<< x << " Y: " << y << endl;
 }
@@ -71,47 +71,41 @@ int Point::GetY() const
 	return y;
 }
 
-///int -------> Point  explisite constructor
-
-
-Point::operator int()//////  Point----->int
+Point::operator int()//////  Point----->
 {
 
 	return x + y;
 
 }
 
-Point& Point::operator++()////префіксна форма
+Point& Point::operator++()////РїСЂРµС„С–РєСЃРЅР° С„РѕСЂРјР°   ++СЂ1     (++p1)--
 {
 	x++;
 	y++;
 	return *this;/////   (++obj)++
 }
 
-Point Point::operator++(int i)////постфіксна форма
+Point Point::operator++(int i)////РїРѕСЃС‚С„С–РєСЃРЅР° С„РѕСЂРјР°  СЂ1++   (p1++)-- error
 {
 	Point temp ( *this);
 	x++;
 	y++;
-	return temp;////   (obj++)++ копія , не можна !!!! 
+	return temp;////   (obj++)++ РєРѕРїС–СЏ , РЅРµ РјРѕР¶РЅР° !!!! 
+
+
 }
 
 
 
-
-
-
-
-
-/////Глобальними функціями  2+Point
-Point operator+(int number, const Point& obj)///// перегрузка глобальною функцією  int+Point
+/////Р“Р»РѕР±Р°Р»СЊРЅРёРјРё С„СѓРЅРєС†С–СЏРјРё  2+Point
+Point operator+(int number, const Point& obj)///// РїРµСЂРµРіСЂСѓР·РєР° РіР»РѕР±Р°Р»СЊРЅРѕСЋ С„СѓРЅРєС†С–С”СЋ  int+Point
 {
 	
-	Point res(number + obj.GetX(), number + obj.GetY());
+	Point rez(number + obj.GetX(), number + obj.GetY());
 
-	return res;
+	return rez;
 }
-Point operator+( const Point& obj, int number)///// перегрузка глобальною функцією Point+int
+Point operator+( const Point& obj, int number)///// РїРµСЂРµРіСЂСѓР·РєР° РіР»РѕР±Р°Р»СЊРЅРѕСЋ С„СѓРЅРєС†С–С”СЋ Point+int
 {
 
 	Point rez(number + obj.GetX(), number + obj.GetY());
