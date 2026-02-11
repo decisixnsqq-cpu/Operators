@@ -78,7 +78,7 @@ Point::operator int()//////  Point----->
 
 }
 
-Point& Point::operator++()////префіксна форма   ++р1     (++p1)--
+Point& Point::operator++()////префіксна форма   ++р1     (++p1)--//
 {
 	x++;
 	y++;
