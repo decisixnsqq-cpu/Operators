@@ -1,114 +1,57 @@
-﻿#pragma once
+#pragma once
 #include <iostream>
-
 
 using namespace std;
 
+class Point
+{
+    int x;
+    int y;
 
-
-class Point {
-
-	int x;
-	int y;
-	
 public:
 
-	Point();
-	Point(int x, int y);
+    // Конструкторы
+    Point();
+    Point(int x, int y);
 
+    // ---------------- АРИФМЕТИКА ----------------
+    Point operator+(const Point& obj) const;
+    Point operator+(int number) const;
+    Point operator-(const Point& obj) const;
+    Point operator*(int number) const;
+    Point operator/(int number) const;
 
-	///екземплярні  методи, визиваються на об'єктах, об'єкти потрапляють в метод через константний вказівник this
+    // ---------------- КОМБИНИРОВАННЫЕ ----------------
+    Point& operator+=(int number);
+    Point& operator-=(const Point& obj);
+    Point& operator*=(int number);
+    Point& operator/=(int number);
 
-	Point operator +(const Point& obj) const;////це перевантаження/перегрузка оператора у методі класу   obj1+obj2 Point+Point
-	Point operator+ (int numb)const;//////  obj+5  Point+int  в методі   
+    // ---------------- ЛОГИЧЕСКИЕ ----------------
+    bool operator==(const Point& obj) const;
+    bool operator!=(const Point& obj) const;
+    bool operator>(const Point& obj) const;
+    bool operator<(const Point& obj) const;
+    bool operator>=(const Point& obj) const;
+    bool operator<=(const Point& obj) const;
 
-	Point operator +=(int rs);////це перевантаження/перегрузка оператора у методі класу
-	////Point&  operator =(const Point& obj);   ///не обов'язково перевизначати , нам підходить за замовчуванням, побітове копіювання
+    // ---------------- ПРЕОБРАЗОВАНИЕ ТИПОВ ----------------
+    operator int();
+    operator double();
 
-	///////Логічні оператори   ==  !=        >, <,>=,<=     
-	bool operator ==(const Point& obj);
-	bool operator >(const Point& obj);
+    // ---------------- ИНКРЕМЕНТ ----------------
+    Point& operator++();     // префикс
+    Point operator++(int);   // постфикс
 
+    // ---------------- ДЕКРЕМЕНТ ----------------
+    Point& operator--();     // префикс
+    Point operator--(int);   // постфикс
 
-	//////Всі інші Логічні оператори  на дз   <, !=, <=, >=  !!!!!!!!!!!!!!!!!!!
+    void Show() const;
 
-	//Point operator -(const Point& obj)const;   ////////DZ!!!!!
-	//Point operator /(const Point& obj)const;	////////DZ!!!!!
-	//Point operator *(const Point& obj)const;	////////DZ!!!!!
-
-
-	/*Point operator -=(int rs);     ////////DZ!!!!!
-	Point operator /=(int rs);       ////////DZ!!!!!
-	Point operator *=(int rs);*/     ////////DZ!!!!!
-
-
-
-	void Show()  const;
-
-	int GetX()  const;
-	int GetY()  const;
-
-
-	////Перегрузка оператору перетворення(Конвертація) типу
-
-	 operator int();//// Point ----->int
-	 operator double();/////Point----->double   !!!!!! допишіть
-
-
-
-
-
-	 /////Перегрузка інкременту префіксна форма, допускає повторне використання оператора   Point&    ++a     a=a+1
-
-	 Point& operator ++();/////   унарна оператор не приймає параментів , перегрузка методом
-
-	 /////Перегрузка інкременту постфіксна форма, не допускає повторне використання оператора
-
-	 Point operator ++(int i);
-
-
-	 /////  -- Decrement   префіксна форма/постфіксна форма  DZ!!!!!!!!!!!!!!!!!!!!!!!!//
-
-
-
+    int GetX() const;
+    int GetY() const;
 };
 
-
-
-
-
-
-
-///Перегрузка глобальною функцією , що не належить класу
-
-Point operator+(const int number, const Point& obj);/////  int+Point можна зробити тільки глобальною функцією  **********
-
-/////Point operator+(const Point& obj, int number);////глобальна функція   Point+int!!!!!!!!!!!!!!!!!!!!!
-
-
-
-/*Тільки методами класу перегрузка : перетворення типів   (), =, [], ->  */
-
-
-/* Не перегружаються :
-
-- диркективи препроцесора include
--sizeof
-- :: зозширення видимості
-- тернарний
-- .
-- typeof
-
-*/
-
-
-/*Нема операторів що перегружаються тільки глобальними функціями, але є випадки
-наприклад 
-int + obj
-перший операнд - звичайний тип
-
-
-
-*/
-
-
+// Глобальная функция для int + Point
+Point operator+(int number, const Point& obj);
