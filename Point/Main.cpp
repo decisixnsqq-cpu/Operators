@@ -1,102 +1,50 @@
-﻿#include <iostream>
+#include <iostream>
 #include "Point.h"
 
 using namespace std;
 
-
 int main()
 {
-	/////1.  Operator +
+    Point p1(2, 3);
+    Point p2(4, 5);
 
+    // Арифметика
+    Point p3 = p1 + p2;
+    p3.Show();
 
-	//int a = 5.2;
-	//int b = 6;
-	//cout << a + b << endl;
+    Point p4 = p1 - p2;
+    p4.Show();
 
-	//int c = a + b;/////     int operator + (int b) const   це оператор визивається на об'єкті а
+    Point p5 = p1 * 2;
+    p5.Show();
 
+    Point p6 = 2 + p1;
+    p6.Show();
 
-	////  Пример перегрузки методами класса
+    // Комбинированные
+    p1 += 5;
+    p1.Show();
 
-	///левый операнд передается в указатель this   , а правый заходит параметром
+    p1 *= 2;
+    p1.Show();
 
-	Point p1(1, 2);
-	Point p2(3, 4);
+    // Логические
+    if (p1 > p2)
+        cout << "p1 > p2" << endl;
 
-	///if (p2>p1)
+    // Инкремент / декремент
+    ++p1;
+    p1.Show();
 
-	//Point p3 = p1 + p2;///  operator + визивається для лівого операнда p1(this), праввий операнд p2 заходить параметром 
+    p1--;
+    p1.Show();
 
-	//p3.Show();
+    // Преобразование типов
+    int sum = p1;
+    cout << "int: " << sum << endl;
 
+    double d = p1;
+    cout << "double: " << d << endl;
 
-	//Point res = p1 + p2 + p3;//
-
-	//res.Show();
-
-	//p1 += 5 ;
-
-
-	//                    ////Point operator +(const Point& р2) const;  --  екземплярний варіант
-	///*p1.Show();
-	//p2.Show();
-	//rez.Show();*/
-
-
-	Point rez2 = p1 + 2;//// operator + визивається для лівого операнда p1(this),праввий операнд число 2 заходить параметром 
-	//                    //// Point operator+ (int numb)const;
-
-	rez2.Show();
-
-
-    Point rez3 = 2 + p1;/////////Глобальними функціями
-	//                    ///////  Point operator+(int number, const Point & obj)///// перегрузка глобальною функцією  int+Point
-	//                    //////    Point operator+( const Point & obj, int number,)////перегрузка глобальною функцією  Poin+int
-
-
-
-	////////2.Point operator +=(int rs)   
-
-	//Point a(2, 3);
-
-	//a += 2;
-	//a.Show();
-
-
-	/////3.  Оператор перетворення типів operator int() ,   explicit  Pont---->int  
-	
-	/*Point a(2, 3);
-
-	cout << int(a) << endl;*/
-
-
-	//////4.  Increment ++
-
-	//int a = 5;
-
-	//cout << (a++) << endl;  ///5
-	//cout << a << endl;    //6
-
-	//cout << (++a)++ << endl;////   префіксна форма одразу змінює об'єкт int& operator++ ()  this
-
-
-	//a = 5;
-	//cout << (a++)++ << endl;////   постфіксна форма  змінює об'єкт  після  int operator++ (int i)
-
-
-
-	// Point obj(2,3);
-	 //(obj++)++;///Point operator ++(int i);
-	 //obj.Show();
-
-
-
-	// (++obj)++;//////	 Point& operator ++();
-	 //obj.Show();
-
-
-	
-
-
-	 
+    return 0;
 }
