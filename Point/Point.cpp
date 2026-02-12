@@ -1,114 +1,182 @@
-﻿#include "Point.h"
+#include "Point.h"
+
+// ---------------- КОНСТРУКТОРЫ ----------------
 
 Point::Point()
 {
-	x = 0;
-	y = 0;
+    x = 0;
+    y = 0;
 }
 
 Point::Point(int x, int y)
 {
-	this->x = x;
-	this->y = y;
+    this->x = x;
+    this->y = y;
 }
 
-Point Point::operator+(const Point& obj) const ///////перший операнд а це this, а другий операнд b це параметр const Point& obj      у main    a+b
-{
+// ---------------- АРИФМЕТИКА ----------------
 
-	//this->x += obj.x;
-	
-	Point rez(this->x + obj.x, this->y + obj.y);
-	return rez;
+Point Point::operator+(const Point& obj) const
+{
+    return Point(x + obj.x, y + obj.y);
 }
 
-Point Point::operator+(int a) const
+Point Point::operator+(int number) const
 {
-	////this 
-	Point rez(x + a, y + a);
-	return rez;
+    return Point(x + number, y + number);
 }
 
-Point Point::operator+=(int rs)
+Point Point::operator-(const Point& obj) const
 {
-
-	x += rs;
-	y += rs;
-	return *this;
+    return Point(x - obj.x, y - obj.y);
 }
 
-bool Point::operator==(const Point& obj)
+Point Point::operator*(int number) const
 {
-	if (x == obj.x)
-		if (y == obj.y)
-			return true;
-
-
-	return false;
+    return Point(x * number, y * number);
 }
 
-bool Point::operator>(const Point& obj)
+Point Point::operator/(int number) const
 {
-	if (x > obj.x)
-		if (y >obj.y)
-			return true;
-
-
-	return false;
+    return Point(x / number, y / number);
 }
 
-void Point::Show() const///// є методом класу Point::   , ::- оператор розширення видимості
+// ---------------- КОМБИНИРОВАННЫЕ ----------------
+
+Point& Point::operator+=(int number)
 {
-	cout <<"X: "<< x << " Y: " << y << endl;
+    x += number;
+    y += number;
+    return *this;
+}
+
+Point& Point::operator-=(const Point& obj)
+{
+    x -= obj.x;
+    y -= obj.y;
+    return *this;
+}
+
+Point& Point::operator*=(int number)
+{
+    x *= number;
+    y *= number;
+    return *this;
+}
+
+Point& Point::operator/=(int number)
+{
+    x /= number;
+    y /= number;
+    return *this;
+}
+
+// ---------------- ЛОГИЧЕСКИЕ ----------------
+
+bool Point::operator==(const Point& obj) const
+{
+    return x == obj.x && y == obj.y;
+}
+
+bool Point::operator!=(const Point& obj) const
+{
+    return !(*this == obj);
+}
+
+bool Point::operator>(const Point& obj) const
+{
+    if (x > obj.x)
+        return true;
+    if (x == obj.x && y > obj.y)
+        return true;
+    return false;
+}
+
+bool Point::operator<(const Point& obj) const
+{
+    if (x < obj.x)
+        return true;
+    if (x == obj.x && y < obj.y)
+        return true;
+    return false;
+}
+
+bool Point::operator>=(const Point& obj) const
+{
+    return !(*this < obj);
+}
+
+bool Point::operator<=(const Point& obj) const
+{
+    return !(*this > obj);
+}
+
+// ---------------- ПРЕОБРАЗОВАНИЕ ----------------
+
+Point::operator int()
+{
+    return x + y;
+}
+
+Point::operator double()
+{
+    return (double)(x + y);
+}
+
+// ---------------- ИНКРЕМЕНТ ----------------
+
+Point& Point::operator++()
+{
+    ++x;
+    ++y;
+    return *this;
+}
+
+Point Point::operator++(int)
+{
+    Point temp(*this);
+    ++x;
+    ++y;
+    return temp;
+}
+
+// ---------------- ДЕКРЕМЕНТ ----------------
+
+Point& Point::operator--()
+{
+    --x;
+    --y;
+    return *this;
+}
+
+Point Point::operator--(int)
+{
+    Point temp(*this);
+    --x;
+    --y;
+    return temp;
+}
+
+// ---------------- ПРОЧЕЕ ----------------
+
+void Point::Show() const
+{
+    cout << "X: " << x << " Y: " << y << endl;
 }
 
 int Point::GetX() const
 {
-	return x;
+    return x;
 }
 
 int Point::GetY() const
 {
-	return y;
+    return y;
 }
 
-Point::operator int()//////  Point----->
+// ---------------- ГЛОБАЛЬНАЯ ФУНКЦИЯ ----------------
+
+Point operator+(int number, const Point& obj)
 {
-
-	return x + y;
-
-}
-
-Point& Point::operator++()////префіксна форма   ++р1     (++p1)--//
-{
-	x++;
-	y++;
-	return *this;/////   (++obj)++
-}
-
-Point Point::operator++(int i)////постфіксна форма  р1++   (p1++)-- error
-{
-	Point temp ( *this);
-	x++;
-	y++;
-	return temp;////   (obj++)++ копія , не можна !!!! 
-
-
-}
-
-
-
-/////Глобальними функціями  2+Point
-Point operator+(int number, const Point& obj)///// перегрузка глобальною функцією  int+Point
-{
-	
-	Point rez(number + obj.GetX(), number + obj.GetY());
-
-	return rez;
-}
-Point operator+( const Point& obj, int number)///// перегрузка глобальною функцією Point+int
-{
-
-	Point rez(number + obj.GetX(), number + obj.GetY());
-
-	return rez;
+    return Point(obj.GetX() + number, obj.GetY() + number);
 }
